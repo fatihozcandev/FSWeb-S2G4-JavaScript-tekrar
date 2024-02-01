@@ -120,13 +120,18 @@ console.log(ucebolunenlerintoplami)
 	/* 	3d. `besyuzdenkucuksayilar` adında bir dizi oluşturarak, sayilar dizisinin içindeki 
     500'den küçük sayıları bu diziye atayın (.filter metodunu kullanın) */
 // 3d çözümü
-const besyuzdenkucuksayilar = sayilar2.filter(() => sayilar2.length< 500);
 
+const isBigEnough = (x) => {
+  return x < 500;
+}
+const besyuzdenkucuksayilar = sayilar2.filter(isBigEnough);
 
 /*3e. besyuzdenkucuksayilar dizisindeki sayıları küçükten büyüğe sıralayıp 
     `siralisayilar` adındaki bir diziye aktarın (.sort metodunu kullanın)*/ 
 // 3e çözümü
 let siralisayilar = besyuzdenkucuksayilar.slice().sort(function(a, b){return a - b});
+
+
 
 
 /* 3f. `tekraredensayilar` adında bir dizi oluşturun. sayilar dizisi içerisindeki bazı sayılar birden fazla kere yazılmış. 
@@ -141,9 +146,26 @@ let siralisayilar = besyuzdenkucuksayilar.slice().sort(function(a, b){return a -
 /* 3f çözümü */
 
 
-let tekraredensayilar;
+const counts = {};
 
-/* const rakamlar = (sayi) => {
+sayilar2.forEach(function (x) { 
+  counts[x] = (counts[x] || 0) + 1; 
+});
+let tekraredensayilar = [];
+for (const key in counts) {
+  if (counts[key] > 1 ) 
+ { let result = `${key} sayısı ${counts[key]} kere tekrar edilmiştir`;
+ tekraredensayilar.push(result)
+}
+}
+console.log("AAAA",tekraredensayilar)
+
+
+/* const toFindDuplicates = arry => arry.filter((item, index) => arr.indexOf(item) !== index)
+const duplicateElementa = tofindDuplicates(arry);
+console.log(duplicateElements);
+
+const rakamlar = (sayi) => {
   tekrar = {};
   const sayiStr = sayi.toString();
   for (i of sayiStr) {
